@@ -1,10 +1,29 @@
+import os
+import gdown
+import zipfile
 import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
+# Google Drive file ID
+FILE_ID = "1VsZvdbKFG4muLrXoR29XAYqca7USIVJZ"
+ZIP_OUTPUT = "brain_tumor_model.zip"
+MODEL_DIR = "model_dir"
+MODEL_PATH = os.path.join(MODEL_DIR, "brain_tumor_model.keras")
+
+# Download zip if not exists
+if not os.path.exists(ZIP_OUTPUT):
+    url = f"https://drive.google.com/uc?id={FILE_ID}"
+    gdown.download(url, ZIP_OUTPUT, quiet=False)
+
+# Extract zip if model not already extracted
+if not os.path.exists(MODEL_PATH):
+    with zipfile.ZipFile(ZIP_OUTPUT, 'r') as zip_ref:
+        zip_ref.extractall(MODEL_DIR)
+
 # Load saved model
-model = load_model("brain_tumor_model.keras")
+model = load_model(MODEL_PATH)
 
 # Class labels (तुझ्या dataset नुसार adjust कर)
 class_names = ['glioma', 'meningioma', 'notumor', 'pituitary']
