@@ -51,7 +51,7 @@ st.sidebar.write("""
 """)
 
 st.sidebar.markdown("---")
-st.sidebar.write("👩‍💻 Created by **Sneha Hodke**")
+st.sidebar.write("👩‍💻 Created by **Sneha Ghodke**")
 
 # Upload or Camera option
 option = st.radio("Choose Input Method:", ["Upload File", "Use Camera"])
